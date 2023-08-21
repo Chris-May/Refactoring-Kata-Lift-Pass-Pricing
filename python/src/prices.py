@@ -43,7 +43,7 @@ def prices():
                 is_holiday = False
                 reduction = 0
                 for row in cursor.fetchall():
-                    holiday = row[0]
+                    holiday = datetime.fromisoformat(row[0])
                     if "date" in request.args:
                         d = datetime.fromisoformat(request.args["date"])
                         if d.year == holiday.year and d.month == holiday.month and holiday.day == d.day:
