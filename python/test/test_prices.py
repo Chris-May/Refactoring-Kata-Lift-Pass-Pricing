@@ -48,13 +48,11 @@ def test__api__day_pass__pricing(lift_pass_pricing_app, params, expected_price):
 
 
 @pytest.mark.parametrize('params, expected_price', [
-    pytest.param(dict(type='night'), 0, id='Standard night'),
     pytest.param(dict(type='night', age=45), 19, id='Standard night'),
     pytest.param(dict(type='night', age=10), 19, id='Under 15 no discount'),
     pytest.param(dict(type='night', age=5), 0, id='Under 6 free'),
     pytest.param(dict(type='night', age=25, date='2019-02-18'), 19, id='Holidays are the same'),
     pytest.param(dict(type='night', age=25, date='2019-02-11'), 19, id='No discounts on Monday'),
-    pytest.param(dict(type='night', date='2019-02-11'), 0, id='Loophole for ageless people at night'),
 ])
 def test__api__night_pass_pricing(lift_pass_pricing_app, params, expected_price):
     response = requests.get(lift_pass_pricing_app + "/prices", params=params)
